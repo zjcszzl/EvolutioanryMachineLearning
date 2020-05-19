@@ -5,9 +5,8 @@ from xcs import XCSAlgorithm
 import random
 import matplotlib.pyplot as plt
 
+
 # Based on the ramdon assignment of 0 ,1 and #, generate the rule
-
-
 def generateRule(zeros, ones, wildcards):
     new_rule = ['0'] * zeros + ['1'] * ones + ['#'] * wildcards
     random.shuffle(new_rule)
@@ -46,8 +45,8 @@ def readFile(path):
     dataset = dataset.values.tolist()
     random.shuffle(dataset)
     test = dataset[0::5]
-    #train = dataset[1::5] + dataset[2::5] + dataset[3::5] + dataset[4::5]
-    train = dataset[:]
+    train = dataset[1::5] + dataset[2::5] + dataset[3::5] + dataset[4::5]
+    #train = dataset[:]
     #test = train
     return train, test
 
@@ -77,7 +76,7 @@ def checkMathAndFit(dataset, rule):
     return number_of_match, number_of_fit
 
 
-# update the Rules Set, discard all the rule that have less accurafy of 0.5
+# update the Rules Set, discard all the rule that have less accurafy of 0.6
 def updateRules(rules_fitness, rules):
     temp = set()
     for rule, fitness in rules_fitness.items():
@@ -151,7 +150,6 @@ if __name__ == "__main__":
                 rules.remove(min_elem)
 
     # Every generation, choose the best two rules in the rules set to crossover and generate the child
-
     def crossoverStep():
         temp = list(rules)
         if len(temp) < 2:
